@@ -1,4 +1,4 @@
-<section class="admin-dashboard">
+<section class="admin-dashboard" id="adminDashboard">
   <header class="page-header">
     <h1>Admin Dashboard</h1>
   </header>
@@ -18,8 +18,18 @@
         <div class="card">
           <div class="card-body">
             <h3 class="card-title">Categories</h3>
-            <p class="card-text">Total Categories: <%= @category_count %></p>
-            <%= link_to 'View Categories', admin_categories_path, class: 'btn btn-primary' %>
+            <p class="card-text">Total Categories: <%= @category_count %></p>            
+            <!-- Button to Toggle Categories List -->
+            <button id="toggleCategories" class="btn btn-primary">Categories</button>
+            
+            <div class="categories-list" id="categoriesList" style="display: none;">
+              <h2>Categories</h2>
+              <ul>
+                <% @categories.each do |category| %>
+                  <li><%= category.name %></li>
+                <% end %>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

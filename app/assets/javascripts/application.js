@@ -15,3 +15,25 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+// Wait for the document to be ready
+document.addEventListener("turbolinks:load", function () {
+  // Find the parent element that remains constant during navigation
+  const adminDashboard = document.getElementById("adminDashboard");
+
+  // Find the button and categories list by their IDs
+  const toggleButton = document.getElementById("toggleCategories");
+  const categoriesList = document.getElementById("categoriesList");
+
+  // Add a click event listener to the parent element
+  adminDashboard.addEventListener("click", function (event) {
+    // Check if the clicked element is the toggle button
+    if (event.target === toggleButton) {
+      // Toggle the visibility of the categories list
+      if (categoriesList.style.display === "none") {
+        categoriesList.style.display = "block";
+      } else {
+        categoriesList.style.display = "none";
+      }
+    }
+  });
+});
