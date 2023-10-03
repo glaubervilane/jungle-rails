@@ -11,6 +11,11 @@ Rails.application.routes.draw do
     post   :remove_item
   end
 
+  resources :users, only: [:new, :create]
+    get '/login', to: 'users#login'
+    post '/login', to: 'users#login'
+    delete '/logout', to: 'users#logout'
+
   resources :orders, only: [:create, :show]
 
   namespace :admin do
