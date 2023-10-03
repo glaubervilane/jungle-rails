@@ -14,13 +14,27 @@ class UsersController < ApplicationController
   end
 
   def login
-    # TODO - Implement user login logic here.
+    # TODO - This action should render the login form.
   end
-
+  
+  def perform_login
+    @user = User.find_by(email: params[:email])
+  
+    if @user && @user.authenticate(params[:password])
+      # User successfully logged in, store user ID in session
+      session[:user_id] = @user.id
+      redirect_to root_path, notice: 'Logged in successfully.'
+    else
+      flash.now[:alert] = 'Invalid email or password.'
+      render :login
+    end
+  end
+  
   def logout
-    # TODO - Implement user logout logic here.
+    # Log the user out by clearing the session
+    session[:user_id] = nil
+    redirect_to root_path, notice: 'Logged out successfully.'
   end
-
   
   private
   
