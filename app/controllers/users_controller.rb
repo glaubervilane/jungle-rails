@@ -22,13 +22,12 @@ class UsersController < ApplicationController
     @user = User.find_by(email: params[:email])
   
     if @user && @user.authenticate(params[:password])
-      # User successfully logged in, store user ID and name in session
+      # User successfully logged in, store user ID in session
       session[:user_id] = @user.id
-      session[:user_name] = "#{@user.first_name} #{@user.last_name}"
-  
+      session[:user_name] = @user.first_name # Store the user's first name in the session
       redirect_to root_path, notice: 'Logged in successfully.'
     else
-      flash.now[:alert] = 'Invalid email or password.'
+      flash.now[:alert] = 'Invalid email or password. Please try again.' # Set a flash alert message
       render :login
     end
   end  
