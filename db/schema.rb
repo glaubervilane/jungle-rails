@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2023_10_03_115148) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "plain_password"
   end
 
   add_foreign_key "line_items", "orders"

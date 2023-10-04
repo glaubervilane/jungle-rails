@@ -12,9 +12,9 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:new, :create]
-    get '/login', to: 'users#login'
-    post '/login', to: 'users#login'
-    delete '/logout', to: 'users#logout'
+    get '/login' => 'users#login'
+    post '/login' => 'users#perform_login'
+    delete '/logout' => 'users#logout'
 
   resources :orders, only: [:create, :show]
 

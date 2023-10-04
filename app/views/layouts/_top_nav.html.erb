@@ -40,7 +40,6 @@
             </li>
             <% end %>
             <%= link_to "About Us", about_path , class: "nav-link" %>
-            <%= link_to 'Login', login_path, class: 'nav-link' %>
           <%# </ul>
         </li> %>
       </ul>
@@ -66,6 +65,21 @@
           <%= link_to cart_path, class: "nav-link " do %> <%= fa_icon "shopping-cart" %>
           My Cart (<%= cart.size %>) <% end %>
         </li>
+        <!-- Check if a user is logged in -->
+        <% if current_user %>
+          <!-- Display the user's first name and a logout button -->
+          <li class="nav-item">
+            <span class="nav-link">Welcome, <%= session[:user_name] %></span>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Logout', logout_path, method: :delete, class: 'nav-link' %>
+          </li>
+        <% else %>
+          <!-- Display the login link if no user is logged in -->
+          <li class="nav-item">
+            <%= link_to 'Login', login_path, class: 'nav-link' %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>

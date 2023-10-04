@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       # User successfully registered, you can automatically log them in here if needed.
+      session[:user_id] = @user.id
       redirect_to root_path, notice: 'User registered successfully.'
     else
       render :new
@@ -14,21 +15,23 @@ class UsersController < ApplicationController
   end
 
   def login
-    # TODO - This action should render the login form.
+    # This action should render the login form.
   end
   
   def perform_login
     @user = User.find_by(email: params[:email])
   
     if @user && @user.authenticate(params[:password])
-      # User successfully logged in, store user ID in session
+      # User successfully logged in, store user ID and name in session
       session[:user_id] = @user.id
+      session[:user_name] = "#{@user.first_name} #{@user.last_name}"
+  
       redirect_to root_path, notice: 'Logged in successfully.'
     else
       flash.now[:alert] = 'Invalid email or password.'
       render :login
     end
-  end
+  end  
   
   def logout
     # Log the user out by clearing the session
