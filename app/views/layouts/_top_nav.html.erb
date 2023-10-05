@@ -69,7 +69,7 @@
         <% if current_user %>
         <!-- Display the user's name and a logout button -->
         <li class="nav-item">
-          Welcome, <%= current_user.first_name %>!
+          Signed in as <%= current_user.first_name %>!
         </li>
         <li class="nav-item">
           <%= link_to "Logout", logout_path, method: :delete, class: "nav-link" %>
